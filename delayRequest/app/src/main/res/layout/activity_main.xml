@@ -22,14 +22,84 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/tv_test"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_synchronized"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="테스트"
-        android:textSize="16dp"
-        app:layout_constraintTop_toBottomOf="@id/abl_main"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/abl_main">
+
+        <TextView
+            android:id="@+id/tv_synchronized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Synchronized 테스트"
+            android:textSize="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <CheckBox
+            android:id="@+id/cb_synchronized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_synchronized"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_coroutine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_synchronized">
+
+        <TextView
+            android:id="@+id/tv_coroutine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coroutine Mutex 테스트"
+            android:textSize="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <CheckBox
+            android:id="@+id/cb_coroutine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_coroutine"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_concurrent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_coroutine">
+
+        <TextView
+            android:id="@+id/tv_concurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ConcurrentHasmap 테스트"
+            android:textSize="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <CheckBox
+            android:id="@+id/cb_concurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_concurrent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

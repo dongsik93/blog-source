@@ -1,6 +1,5 @@
 package com.example.delayrequest
 
-import android.os.SystemClock
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.ScheduledThreadPoolExecutor
 import java.util.concurrent.TimeUnit
@@ -46,12 +45,8 @@ class SynchronizedRequestImpl: DelayRequest() {
     }
 
     inner class CancelableTask (private val request: SyncRequestEvent): Runnable {
-        private val created = SystemClock.elapsedRealtime()
-        private val id = "$created:$request"
-
         override fun run() {
-            val itemId = request.itemId
-            println("[${TAG}] Item Id : $itemId, task starting... task=${taskTag()} $id")
+            println("[${TAG}] task starting... task=${taskTag()}")
             try {
                 process(request)
             } catch (e: Exception) {
