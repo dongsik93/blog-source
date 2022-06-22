@@ -40,7 +40,6 @@ class SynchronizedRequestImpl: DelayRequest() {
             currentTask.add(
                 executor.schedule(CancelableTask(event), 1500L, TimeUnit.MILLISECONDS)
             )
-
         }
     }
 

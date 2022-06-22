@@ -1,16 +1,12 @@
 package com.example.delayrequest
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import java.util.concurrent.ScheduledThreadPoolExecutor
 
-class MutexRequestImpl : DelayRequest() {
-
+@ObsoleteCoroutinesApi
+class SingleThreadRequestImpl : DelayRequest() {
     private val scope = CoroutineScope(Dispatchers.IO)
 
-    /* Mutual Exclusion */
-    private val mutex = Mutex()
+    private val dispatcher = newSingleThreadContext("DelayRequestContext")
 
     /* 작업 큐 */
     private val currentJobs: MutableMap<Long, Job> = mutableMapOf()
@@ -23,11 +19,11 @@ class MutexRequestImpl : DelayRequest() {
         println("Cancel Process : $request")
     }
 
-    fun sendEvent(itemId: Long, event: SyncRequestEvent) {
-        scope.launch {
-            mutex.withLock(currentJobs) {
-                val queueSize = currentJobs.size
+    override fun taskTag() = TAG
 
+    fun sendEventWithCoroutine(itemId: Long, event: SyncRequestEvent) {
+        scope.launch {
+            withContext(dispatcher) {
                 /* 작업 완료는 큐에서 삭제 */
                 val done = currentJobs.filter { it.value.isCompleted }
                 val canceled = done.count { it.value.isCancelled }
@@ -35,24 +31,17 @@ class MutexRequestImpl : DelayRequest() {
                     currentJobs.remove(it.key)
                 }
 
-                println("[${TAG}] Item Id : $itemId, [Queue] size:$queueSize, done=${done.size}, cancel=${canceled}")
-
-                /* 기본동작 : 동작중인 task 가 존재하면 취소 */
                 currentJobs.forEach {
                     if (it.key == itemId) {
-                        println("cancel previous task: ${taskTag()}")
                         it.value.cancel()
                     }
                 }
-
-                currentJobs[itemId] = cancelableJob(event, scope)
+                currentJobs[itemId] = cancelableJob(event, this)
             }
         }
     }
 
-    override fun taskTag() = TAG
-
     companion object {
-        private const val TAG = "MutexRequestImpl"
+        private const val TAG = "SingleThreadRequestImpl"
     }
 }

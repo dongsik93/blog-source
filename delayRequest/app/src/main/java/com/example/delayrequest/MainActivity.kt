@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.delayrequest.databinding.ActivityMainBinding
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
+@ObsoleteCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -21,16 +23,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListener() {
         with(binding) {
-            cbSynchronized.setOnClickListener {
-                vm.doSynchronized(cbSynchronized.isChecked)
+            cbSynchronized.setOnCheckedChangeListener { _, isChecked ->
+                vm.doSynchronized(isChecked)
             }
 
-            cbCoroutine.setOnClickListener {
-                vm.doMutex(cbSynchronized.isChecked)
+            cbCoroutine.setOnCheckedChangeListener { _, isChecked ->
+                vm.doMutex(isChecked)
             }
 
-            cbConcurrent.setOnClickListener {
-                vm.doConcurrent(cbSynchronized.isChecked)
+            cbConcurrent.setOnCheckedChangeListener { _, isChecked ->
+                vm.doConcurrent(isChecked)
+            }
+
+            cbSingleThread.setOnCheckedChangeListener { _, isChecked ->
+                vm.doSingleThread(isChecked)
             }
         }
     }
