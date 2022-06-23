@@ -14,6 +14,9 @@ class MainViewModel : ViewModel() {
     @ObsoleteCoroutinesApi
     private val singleThreadRequestImpl = SingleThreadRequestImpl()
 
+    @ObsoleteCoroutinesApi
+    private val actorRequestImpl = ActorRequestImpl()
+
     fun doMutex(isChecked: Boolean) {
         mutexRequest.sendEvent(
             -1,
@@ -42,4 +45,7 @@ class MainViewModel : ViewModel() {
             SyncRequestEvent(func = { println("[DoSingleThread] 실행 : $isChecked") })
         )
     }
+
+    @ObsoleteCoroutinesApi
+    fun doActor() = actorRequestImpl.sendEvent()
 }

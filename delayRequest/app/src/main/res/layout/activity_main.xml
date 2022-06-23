@@ -128,4 +128,30 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_actor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_single_thread">
+
+        <TextView
+            android:id="@+id/tv_actor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actor 테스트"
+            android:textSize="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_actor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_actor"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
