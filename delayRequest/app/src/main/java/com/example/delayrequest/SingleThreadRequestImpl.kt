@@ -22,22 +22,20 @@ class SingleThreadRequestImpl : DelayRequest() {
     override fun taskTag() = TAG
 
     fun sendEventWithCoroutine(itemId: Long, event: SyncRequestEvent) {
-        scope.launch {
-            withContext(dispatcher) {
-                /* 작업 완료는 큐에서 삭제 */
-                val done = currentJobs.filter { it.value.isCompleted }
-                val canceled = done.count { it.value.isCancelled }
-                done.forEach {
-                    currentJobs.remove(it.key)
-                }
-
-                currentJobs.forEach {
-                    if (it.key == itemId) {
-                        it.value.cancel()
-                    }
-                }
-                currentJobs[itemId] = cancelableJob(event, this)
+        scope.launch(dispatcher) {
+            /* 작업 완료는 큐에서 삭제 */
+            val done = currentJobs.filter { it.value.isCompleted }
+            val canceled = done.count { it.value.isCancelled }
+            done.forEach {
+                currentJobs.remove(it.key)
             }
+
+            currentJobs.forEach {
+                if (it.key == itemId) {
+                    it.value.cancel()
+                }
+            }
+            currentJobs[itemId] = cancelableJob(event, this)
         }
     }
 
