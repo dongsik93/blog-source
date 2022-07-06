@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 31
 
     defaultConfig {
         applicationId = "com.example.delayrequest"
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 31
         versionCode = 1
         versionName = "1"
 
