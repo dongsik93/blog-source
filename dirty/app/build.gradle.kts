@@ -8,7 +8,7 @@ android {
     compileSdk = 31
 
     defaultConfig {
-        applicationId = "com.example.delayrequest"
+        applicationId = "com.example.dirty"
         minSdk = 26
         targetSdk = 31
         versionCode = 1
