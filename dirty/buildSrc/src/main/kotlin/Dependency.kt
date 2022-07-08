@@ -1,11 +1,24 @@
 object Dependency  {
+    const val kotlinStdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21"
+
+    object Configs {
+        const val group = "org.jetbrains"
+        const val module = "annotations-java5"
+    }
+
     object Hilt {
-        val ANDROID = "com.google.dagger:hilt-android:2.42"
-        val COMPILER = "com.google.dagger:hilt-android-compiler:2.42"
+        val ANDROID = "com.google.dagger:hilt-android:2.38.1"
+        val COMPILER = "com.google.dagger:hilt-android-compiler:2.38.1"
+    }
+
+    object Room {
+        const val RUNTIME = "androidx.room:room-runtime:2.4.0-alpha04"
+        const val KTX = "androidx.room:room-ktx:2.4.0-alpha04"
+        const val COMPILER ="androidx.room:room-compiler:2.4.0-alpha04"
     }
 
     object KTX {
-        const val CORE = "androidx.core:core-ktx:1.7.0"
+        const val CORE = "androidx.core:core-ktx:1.6.0"
     }
 
     object AndroidX {

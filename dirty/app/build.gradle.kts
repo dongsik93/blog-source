@@ -15,6 +15,14 @@ android {
         versionCode = 1
         versionName = "1"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
+                arguments["room.incremental"] = "true"
+                arguments["room.expandProjection"] = "true"
+            }
+        }
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -22,6 +30,14 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+
+    /* ONLY Hilt / Coroutine Test*/
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/AL2.0"
+            excludes += "/META-INF/LGPL2.1"
         }
     }
 
@@ -40,14 +56,26 @@ android {
     }
 }
 
+configurations.all {
+    exclude(group = Dependency.Configs.group, module = Dependency.Configs.module)
+}
+
 dependencies {
 
     implementation(project(":presentation"))
     implementation(project(":data"))
     implementation(project(":domain"))
 
+    implementation (Dependency.kotlinStdlibJdk8)
     implementation (Dependency.KTX.CORE)
     implementation (Dependency.AndroidX.APPCOMPAT)
+    implementation (Dependency.AndroidX.CONSTRAINT_LAYOUT)
+    implementation (Dependency.AndroidX.NAVIGATION_FRAGMENT)
+    implementation (Dependency.AndroidX.NAVIGATION_UI)
+    implementation (Dependency.Material.MATERIAL)
+    implementation(Dependency.Room.RUNTIME)
+    implementation(Dependency.Room.KTX)
+    kapt(Dependency.Room.COMPILER)
 
     implementation (Dependency.Hilt.ANDROID)
     kapt(Dependency.Hilt.COMPILER)

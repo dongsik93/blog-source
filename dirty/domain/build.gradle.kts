@@ -1,16 +1,24 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+    id ("com.android.library")
+    id ("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
     id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 31
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 31
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
+                arguments["room.incremental"] = "true"
+                arguments["room.expandProjection"] = "true"
+            }
+        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -18,28 +26,44 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+
+    /* ONLY Hilt / Coroutine Test*/
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/AL2.0"
+            excludes += "/META-INF/LGPL2.1"
+        }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        val options = this
+        options.jvmTarget = "11"
     }
 }
 
+configurations.all {
+    exclude(group = Dependency.Configs.group, module = Dependency.Configs.module)
+}
+
+
 dependencies {
 
-    implementation(project(":domain"))
-
+    implementation (Dependency.kotlinStdlibJdk8)
     implementation (Dependency.KTX.CORE)
-    implementation (Dependency.Hilt.ANDROID)
 
+    implementation(Dependency.Room.RUNTIME)
+    implementation(Dependency.Room.KTX)
+    kapt(Dependency.Room.COMPILER)
+
+    implementation (Dependency.Hilt.ANDROID)
     kapt(Dependency.Hilt.COMPILER)
     kaptAndroidTest (Dependency.Hilt.COMPILER)
 }
