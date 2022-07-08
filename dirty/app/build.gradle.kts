@@ -2,6 +2,7 @@ plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -51,6 +52,11 @@ dependencies {
     implementation (Dependency.AndroidX.NAVIGATION_FRAGMENT)
     implementation (Dependency.AndroidX.NAVIGATION_UI)
     implementation (Dependency.Material.MATERIAL)
+
+    implementation (Dependency.Hilt.ANDROID)
+    kapt(Dependency.Hilt.COMPILER)
+    kaptAndroidTest (Dependency.Hilt.COMPILER)
+
     testImplementation (Dependency.TEST.JUNIT)
     androidTestImplementation (Dependency.TEST.JUNIT_EXT)
     androidTestImplementation (Dependency.TEST.ESPRESSO)

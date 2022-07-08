@@ -1,4 +1,9 @@
 object Dependency  {
+    object Hilt {
+        val ANDROID = "com.google.dagger:hilt-android:2.42"
+        val COMPILER = "com.google.dagger:hilt-android-compiler:2.42"
+    }
+
     object KTX {
         const val CORE = "androidx.core:core-ktx:1.7.0"
     }
