@@ -41,6 +41,10 @@ android {
 
 dependencies {
 
+    implementation(project(":presentation"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
     implementation (Dependency.KTX.CORE)
     implementation (Dependency.AndroidX.APPCOMPAT)
     implementation (Dependency.AndroidX.CONSTRAINT_LAYOUT)
