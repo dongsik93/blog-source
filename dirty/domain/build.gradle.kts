@@ -38,18 +38,8 @@ dependencies {
     implementation(project(":domain"))
 
     implementation (Dependency.KTX.CORE)
-    implementation (Dependency.AndroidX.APPCOMPAT)
-    implementation (Dependency.AndroidX.CONSTRAINT_LAYOUT)
-    implementation (Dependency.AndroidX.NAVIGATION_FRAGMENT)
-    implementation (Dependency.AndroidX.NAVIGATION_UI)
-    implementation (Dependency.Material.MATERIAL)
-
     implementation (Dependency.Hilt.ANDROID)
 
     kapt(Dependency.Hilt.COMPILER)
     kaptAndroidTest (Dependency.Hilt.COMPILER)
-
-    testImplementation (Dependency.TEST.JUNIT)
-    androidTestImplementation (Dependency.TEST.JUNIT_EXT)
-    androidTestImplementation (Dependency.TEST.ESPRESSO)
 }
