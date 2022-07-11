@@ -1,6 +1,7 @@
 package com.example.presentation.views.contact
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,7 +45,11 @@ class MainActivity : AppCompatActivity() {
         when (val event = events as ContactViewModel.ContactEvents) {
             is ContactViewModel.ContactEvents.LoadAllContact -> {
                 println("contact list is : ${event.contactList}")
-                contactAdapter.updateItemList(event.contactList)
+                if (event.contactList.isEmpty()) {
+                    binding.tvContactEmpty.visibility = View.VISIBLE
+                } else {
+                    contactAdapter.updateItemList(event.contactList)
+                }
             }
         }
     }
