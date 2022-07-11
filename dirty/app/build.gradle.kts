@@ -63,6 +63,10 @@ dependencies {
     implementation(Dependency.Room.KTX)
     kapt(Dependency.Room.COMPILER)
 
+    implementation(Dependency.Lifecycle.RUNTIME)
+    implementation(Dependency.Lifecycle.VIEWMODEL)
+    implementation(Dependency.Lifecycle.EXT)
+
     implementation(Dependency.Hilt.ANDROID)
     kapt(Dependency.Hilt.COMPILER)
     kaptAndroidTest(Dependency.Hilt.COMPILER)

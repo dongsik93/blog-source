@@ -56,6 +56,10 @@ dependencies {
     implementation(Dependency.AndroidX.NAVIGATION_UI)
     implementation(Dependency.Material.MATERIAL)
 
+    implementation(Dependency.Lifecycle.RUNTIME)
+    implementation(Dependency.Lifecycle.VIEWMODEL)
+    implementation(Dependency.Lifecycle.EXT)
+
     implementation(Dependency.Room.RUNTIME)
     implementation(Dependency.Room.KTX)
     kapt(Dependency.Room.COMPILER)

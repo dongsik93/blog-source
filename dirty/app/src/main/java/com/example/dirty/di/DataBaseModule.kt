@@ -28,4 +28,7 @@ object DataBaseModule {
     fun provideDirtyFlagDao(database: AppDataBase): DirtyFlagDao {
         return database.dirtyFlagDao
     }
+
+    @Provides
+    fun provideContactDao(appDataBase: AppDataBase) = appDataBase.contactDao
 }

@@ -28,6 +28,12 @@ object Dependency  {
         const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:2.3.5"
     }
 
+    object Lifecycle {
+        const val RUNTIME = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+        const val VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+        const val EXT = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    }
+
     object Material {
         const val MATERIAL = "com.google.android.material:material:1.6.1"
     }

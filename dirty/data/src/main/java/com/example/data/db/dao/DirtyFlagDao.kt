@@ -5,7 +5,7 @@ import androidx.room.Query
 import com.example.data.db.entity.DirtyFlagEntity
 
 @Dao
-interface DirtyFlagDao {
+abstract class DirtyFlagDao : BaseDao<DirtyFlagEntity>() {
     @Query("SELECT * FROM dirty_flag")
-    fun loadDirtyFlag(): List<DirtyFlagEntity>
+    abstract fun loadDirtyFlag(): List<DirtyFlagEntity>
 }
