@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.model.Contact
 import com.example.domain.model.IoDispatcher
 import com.example.domain.usecase.GetAllContactUseCase
+import com.example.domain.usecase.SaveContactUseCase
 import com.example.presentation.base.BaseViewModel
 import com.example.presentation.model.Events
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,12 +15,19 @@ import javax.inject.Inject
 @HiltViewModel
 class ContactViewModel @Inject constructor(
     private val getAllContactUseCase: GetAllContactUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    private val saveContactUseCase: SaveContactUseCase,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : BaseViewModel() {
 
     init {
         viewModelScope.launch(ioDispatcher) {
             event(ContactEvents.LoadAllContact(getAllContactUseCase()))
+        }
+    }
+
+    fun saveContact(contact: Contact) {
+        viewModelScope.launch(ioDispatcher) {
+            saveContactUseCase.invoke(contact)
         }
     }
 

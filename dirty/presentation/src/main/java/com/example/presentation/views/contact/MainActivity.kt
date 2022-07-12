@@ -5,6 +5,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.Contact
 import com.example.presentation.databinding.ActivityMainBinding
 import com.example.presentation.ext.repeatOnStart
 import com.example.presentation.model.Events
@@ -38,6 +39,15 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             rvContact.layoutManager = LinearLayoutManager(this@MainActivity)
             rvContact.adapter = contactAdapter
+
+            tvSubmit.setOnClickListener {
+                vm.saveContact(
+                    Contact(
+                        name = etName.text.toString(),
+                        phoneNumber = etPhone.text.toString()
+                    )
+                )
+            }
         }
     }
 
