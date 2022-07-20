@@ -2,7 +2,9 @@ package com.example.presentation.views.contact
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.Contact
+import com.example.domain.model.ContactParam
 import com.example.domain.model.IoDispatcher
+import com.example.domain.model.SyncFlag
 import com.example.domain.usecase.GetAllContactUseCase
 import com.example.domain.usecase.SaveContactUseCase
 import com.example.presentation.base.BaseViewModel
@@ -27,7 +29,7 @@ class ContactViewModel @Inject constructor(
 
     fun saveContact(contact: Contact) {
         viewModelScope.launch(ioDispatcher) {
-            saveContactUseCase.invoke(contact)
+            saveContactUseCase.invoke(ContactParam(contact, SyncFlag.CREATE))
         }
     }
 
