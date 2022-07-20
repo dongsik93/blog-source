@@ -1,6 +1,5 @@
 package com.example.presentation.views.contact
 
-import androidx.lifecycle.viewModelScope
 import com.example.domain.model.Contact
 import com.example.domain.model.ContactParam
 import com.example.domain.model.IoDispatcher
@@ -11,24 +10,23 @@ import com.example.presentation.base.BaseViewModel
 import com.example.presentation.model.Events
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ContactViewModel @Inject constructor(
     private val getAllContactUseCase: GetAllContactUseCase,
     private val saveContactUseCase: SaveContactUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-) : BaseViewModel() {
+    @IoDispatcher ioDispatcher: CoroutineDispatcher,
+) : BaseViewModel(ioDispatcher) {
 
     init {
-        viewModelScope.launch(ioDispatcher) {
+        onIo {
             event(ContactEvents.LoadAllContact(getAllContactUseCase()))
         }
     }
 
     fun saveContact(contact: Contact) {
-        viewModelScope.launch(ioDispatcher) {
+        onIo {
             saveContactUseCase.invoke(ContactParam(contact, SyncFlag.CREATE))
         }
     }
