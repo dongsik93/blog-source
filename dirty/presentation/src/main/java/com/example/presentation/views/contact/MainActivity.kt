@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.model.Contact
 import com.example.presentation.databinding.ActivityMainBinding
 import com.example.presentation.ext.repeatOnStart
+import com.example.presentation.model.ContactAction
 import com.example.presentation.model.Events
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -41,11 +42,12 @@ class MainActivity : AppCompatActivity() {
             rvContact.adapter = contactAdapter
 
             tvSubmit.setOnClickListener {
-                vm.saveContact(
+                vm.contactAction(
                     Contact(
                         name = etName.text.toString(),
                         phoneNumber = etPhone.text.toString()
-                    )
+                    ),
+                    ContactAction.CREATE
                 )
             }
         }

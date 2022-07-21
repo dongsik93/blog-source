@@ -23,6 +23,28 @@ class ContactRepositoryImpl @Inject constructor(
 
         // 2. upSync
         // random 하게 서버 실패 / 성공동작
+        dirty(contactParam)
+    }
+
+    override fun updateContact(contactParam: ContactParam) {
+        // 1. 전처리
+        contactDao.update(contactParam.contact.toEntity())
+
+        // 2. upSync
+        // random 하게 서버 실패 / 성공동작
+        dirty(contactParam)
+    }
+
+    override fun deleteContact(contactParam: ContactParam) {
+        // 1. 전처리
+        contactDao.delete(contactParam.contact.toEntity())
+
+        // 2. upSync
+        // random 하게 서버 실패 / 성공동작
+        dirty(contactParam)
+    }
+
+    private fun dirty(contactParam: ContactParam) {
         val contactId = Random.nextLong(10)
         if (contactId.toInt() % 2 == 0) {
             // 성공처리
@@ -32,7 +54,7 @@ class ContactRepositoryImpl @Inject constructor(
             val alreadyRegistered = dirtyFlagDao.loadByContactId(contactId)
             if (alreadyRegistered == null) {
                 // 새로운 연락처
-                println("신규 등록 연락처 insert dirtyFlag : $contactId")
+                println("신규 등록 연락처 ${contactParam.syncFlag} : $contactId")
                 dirtyFlagDao.insert(DirtyFlagEntity(contactId))
             } else {
                 // 이미 실패한 기록이 있는 연락처
