@@ -24,6 +24,9 @@ class DirtyFlagRepositoryImpl @Inject constructor(
             if (deleteList.isNotEmpty()) requestSync(deleteList)
         }
 
+        // upSync 후처리
+        dirtyFlagDao.deleteAll()
+
         return true
     }
 

@@ -14,4 +14,7 @@ abstract class DirtyFlagDao : BaseDao<DirtyFlagEntity>() {
 
     @Query("DELETE FROM dirty_flag WHERE id = :contactId")
     abstract fun deleteDirtyFlagById(contactId: Long)
+
+    @Query("DELETE FROM dirty_flag")
+    abstract fun deleteAll()
 }
