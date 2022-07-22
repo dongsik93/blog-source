@@ -1,6 +1,8 @@
 package com.example.data.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.data.db.dao.ContactDao
 import com.example.data.db.dao.DirtyFlagDao
@@ -20,6 +22,11 @@ abstract class AppDataBase : RoomDatabase() {
     abstract val contactDao: ContactDao
 
     companion object {
+        fun getInstance(application: Context) = Room.databaseBuilder(
+            application,
+            AppDataBase::class.java,
+            DB_NAME
+        ).build()
         const val DB_NAME = "DirtyDataBase"
     }
 }

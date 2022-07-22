@@ -13,6 +13,9 @@ abstract class ContactDao : BaseDao<ContactEntity>() {
     @Query("SELECT id FROM contact WHERE name = :name")
     abstract fun getContactIdByName(name: String): Long
 
+    @Query("SELECT * FROM contact WHERE id = :id")
+    abstract fun getContactById(id: Long): List<ContactEntity>
+
     @Query("DELETE from contact WHERE id = :id")
     abstract fun deleteByContactId(id: Long)
 }

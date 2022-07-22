@@ -9,6 +9,7 @@ object Dependency  {
     object Hilt {
         val ANDROID = "com.google.dagger:hilt-android:2.38.1"
         val COMPILER = "com.google.dagger:hilt-android-compiler:2.38.1"
+        val WORKER = "androidx.hilt:hilt-work:1.0.0-alpha01"
     }
 
     object Room {
@@ -26,6 +27,7 @@ object Dependency  {
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.4"
         const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:2.3.5"
         const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:2.3.5"
+        const val WORKER = "androidx.work:work-runtime-ktx:2.7.1"
     }
 
     object Lifecycle {

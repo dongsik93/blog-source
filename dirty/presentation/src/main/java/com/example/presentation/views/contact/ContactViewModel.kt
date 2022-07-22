@@ -4,10 +4,7 @@ import com.example.domain.model.Contact
 import com.example.domain.model.ContactParam
 import com.example.domain.model.IoDispatcher
 import com.example.domain.model.SyncFlag
-import com.example.domain.usecase.DeleteContactUseCase
-import com.example.domain.usecase.GetAllContactUseCase
-import com.example.domain.usecase.SaveContactUseCase
-import com.example.domain.usecase.UpdateContactUseCase
+import com.example.domain.usecase.*
 import com.example.presentation.base.BaseViewModel
 import com.example.presentation.model.ContactAction
 import com.example.presentation.model.Events
@@ -22,11 +19,14 @@ class ContactViewModel @Inject constructor(
     private val saveContactUseCase: SaveContactUseCase,
     private val updateContactUseCase: UpdateContactUseCase,
     private val deleteContactUseCase: DeleteContactUseCase,
+    private val workManagerUseCase: StartContactWorkManager,
     @IoDispatcher ioDispatcher: CoroutineDispatcher,
 ) : BaseViewModel(ioDispatcher) {
 
     init {
         onIo {
+            workManagerUseCase.invoke()
+
             getAllContactUseCase().collect {
                 event(
                     ContactEvents.LoadAllContact(it)

@@ -58,6 +58,7 @@ dependencies {
     implementation(Dependency.AndroidX.CONSTRAINT_LAYOUT)
     implementation(Dependency.AndroidX.NAVIGATION_FRAGMENT)
     implementation(Dependency.AndroidX.NAVIGATION_UI)
+    implementation(Dependency.AndroidX.WORKER)
     implementation(Dependency.Material.MATERIAL)
     implementation(Dependency.Room.RUNTIME)
     implementation(Dependency.Room.KTX)
@@ -70,6 +71,7 @@ dependencies {
     implementation(Dependency.Hilt.ANDROID)
     kapt(Dependency.Hilt.COMPILER)
     kaptAndroidTest(Dependency.Hilt.COMPILER)
+    implementation(Dependency.Hilt.WORKER)
 
     testImplementation(Dependency.TEST.JUNIT)
     androidTestImplementation(Dependency.TEST.JUNIT_EXT)

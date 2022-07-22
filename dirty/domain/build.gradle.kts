@@ -52,4 +52,5 @@ dependencies {
     implementation(Dependency.Hilt.ANDROID)
     kapt(Dependency.Hilt.COMPILER)
     kaptAndroidTest(Dependency.Hilt.COMPILER)
+    implementation(Dependency.Hilt.WORKER)
 }

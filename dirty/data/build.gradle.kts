@@ -48,9 +48,11 @@ dependencies {
 
     implementation(Dependency.Room.RUNTIME)
     implementation(Dependency.Room.KTX)
+    implementation(Dependency.AndroidX.WORKER)
     kapt(Dependency.Room.COMPILER)
 
     implementation(Dependency.Hilt.ANDROID)
     kapt(Dependency.Hilt.COMPILER)
     kaptAndroidTest(Dependency.Hilt.COMPILER)
+    implementation(Dependency.Hilt.WORKER)
 }
