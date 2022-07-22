@@ -2,9 +2,13 @@ package com.example.data.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "contact")
+@Entity(
+    tableName = "contact",
+    indices = [Index(value = ["name"], unique = true)]
+)
 data class ContactEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

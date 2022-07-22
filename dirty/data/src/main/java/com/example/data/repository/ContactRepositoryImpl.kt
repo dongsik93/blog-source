@@ -9,6 +9,8 @@ import com.example.data.mapper.toEntity
 import com.example.domain.model.Contact
 import com.example.domain.model.ContactParam
 import com.example.domain.repository.ContactRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -28,7 +30,8 @@ class ContactRepositoryImpl @Inject constructor(
 
     override fun updateContact(contactParam: ContactParam) {
         // 1. 전처리
-        contactDao.update(contactParam.contact.toEntity())
+        val contactId = contactDao.getContactIdByName(contactParam.contact.name)
+        contactDao.update(contactParam.contact.toEntity(contactId))
 
         // 2. upSync
         // random 하게 서버 실패 / 성공동작
@@ -37,7 +40,8 @@ class ContactRepositoryImpl @Inject constructor(
 
     override fun deleteContact(contactParam: ContactParam) {
         // 1. 전처리
-        contactDao.delete(contactParam.contact.toEntity())
+        val contactId = contactDao.getContactIdByName(contactParam.contact.name)
+        contactDao.deleteByContactId(contactId)
 
         // 2. upSync
         // random 하게 서버 실패 / 성공동작
@@ -69,7 +73,7 @@ class ContactRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getAllContact(): List<Contact> {
-        return contactDao.getAllContact().map { it.toData() }
+    override fun getAllContact(): Flow<List<Contact>> {
+        return contactDao.getAllContact().map { list -> list.map { it.toData() } }
     }
 }

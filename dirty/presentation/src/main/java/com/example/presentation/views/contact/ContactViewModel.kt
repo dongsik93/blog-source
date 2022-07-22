@@ -13,6 +13,7 @@ import com.example.presentation.model.ContactAction
 import com.example.presentation.model.Events
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,7 +27,11 @@ class ContactViewModel @Inject constructor(
 
     init {
         onIo {
-            event(ContactEvents.LoadAllContact(getAllContactUseCase()))
+            getAllContactUseCase().collect {
+                event(
+                    ContactEvents.LoadAllContact(it)
+                )
+            }
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.domain.repository
 
 import com.example.domain.model.Contact
 import com.example.domain.model.ContactParam
+import kotlinx.coroutines.flow.Flow
 
 interface ContactRepository {
     /**
@@ -13,5 +14,5 @@ interface ContactRepository {
 
     fun deleteContact(contactParam: ContactParam)
 
-    fun getAllContact(): List<Contact>
+    fun getAllContact(): Flow<List<Contact>>
 }
